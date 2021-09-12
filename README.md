@@ -6,7 +6,7 @@ Project made as a part of UE20CS204
 
  - [Mohamed Ayaan](https://github.com/Mohamed-Ayaan358) 
  - [Navin Srinivas](https://github.com/NavinShrinivas) 
- - [Mitul Joby]()
+ - [Mitul Joby](https://github.com/Mitul-Joby)
 
 ## Track our progress : 
 
