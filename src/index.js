@@ -1,13 +1,12 @@
-import './index.css';
-// import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { StyledEngineProvider } from '@mui/material/styles';
+import Demo from './demo';
 import App from './App';
 
-
 ReactDOM.render(
-  <React.StrictMode>
+  <StyledEngineProvider injectFirst>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StyledEngineProvider>,
+  document.querySelector("#root")
 );

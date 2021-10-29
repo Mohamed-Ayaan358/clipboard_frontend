@@ -1,10 +1,16 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 function Products() {
     return (
-        <div className='products'>
-            <h1>Products</h1>
-        </div>
+        <>
+            <h1 align="center">Products</h1>
+            <Box component="main" sx={{ flexGrow: 1, p: 3, paddingLeft: "100px" }}>
+
+            </Box>
+
+        </>
     );
 }
 
