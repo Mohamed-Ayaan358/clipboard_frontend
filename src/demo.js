@@ -20,6 +20,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { SidebarData } from './sidebar'
 import { makeStyles } from '@material-ui/core/styles';
 import Pin from './images/Logo.png'
+import { padding } from '@mui/system';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ShareIcon from '@mui/icons-material/Share';
 
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
@@ -89,6 +92,22 @@ export default function MiniDrawer() {
       text: 'Clipboard'
     }]
 
+  const LogoutheadData = [
+    {
+      title: 'LogoutIcon',
+      path: '/',
+      icon: <LogoutIcon />,
+      cName: 'nav-text',
+      text: 'Logout'
+    },
+    {
+      titel: "ShareIcon",
+      path: '/',
+      icon: <ShareIcon />,
+      cName: 'nav-text',
+      text: 'Share'
+    }]
+
   return (
 
     <Box >
@@ -108,12 +127,15 @@ export default function MiniDrawer() {
                     </Link>
                   </ListItemIcon>
                   <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
-                    <h2>{item.text}</h2>
+                    <h2 style={{ fontFamily: "Roboto" }}>{item.text}</h2>
                   </Link>
                 </ListItem>
               </div>)
           })}
-          <Divider style={{ backgroundColor: "#E42346", border: '1x solid' }} />
+          <Divider style={{
+            backgroundColor: "#E42346", border: '2x solid', borderBottomColor: "#E42346",
+            borderBottomWidth: 3
+          }} />
 
           <IconButton
             color="inherit"
@@ -142,23 +164,30 @@ export default function MiniDrawer() {
                       <IconButton sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
                     </Link>
                   </ListItemIcon>
-                  <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                  <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none", fontFamily: "Roboto" }}>
                     <ListItemText primary={item.title} />
                   </Link>
                 </ListItem>
               </div>)
           })}
         </List>
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
+
+        {LogoutheadData.map((item, index) => {
+          return (
+            <div >
+              <ListItem button key={item} sx={{ color: "#FFFFFF", top: "250px" }}>
+                <ListItemIcon key={index} >
+                  <Link to={item.path}>
+                    <IconButton sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
+                  </Link>
+                </ListItemIcon>
+                <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                  <ListItemText primary={item.text} />
+                </Link>
+              </ListItem>
+            </div>
+          )
+        })}
       </Drawer >
     </Box >
   );
