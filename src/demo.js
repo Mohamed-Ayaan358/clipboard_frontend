@@ -17,11 +17,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import { SidebarData } from './sidebar'
 import { makeStyles } from '@material-ui/core/styles';
+import Pin from './images/Logo.png'
 
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
@@ -83,15 +81,38 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const MainheadData = [
+    {
+      title: 'MainIcon',
+      path: '/',
+      cName: 'nav-text',
+      text: 'Clipboard'
+    }]
 
   return (
 
     <Box >
       <Drawer Drawer variant="permanent" open={open} PaperProps={{ sx: { backgroundColor: "#0D0C1D" } }} >
         <List>
-          <h1 style={{
+          {/* <h1 style={{
             color: "#FFFFFF", display: "inline-block"
-          }}>Clipboard</h1>
+          }}>Clipboard</h1> */}
+
+          {MainheadData.map((item, index) => {
+            return (
+              <div  >
+                <ListItem button key={item} sx={{ color: "#FFFFFF" }}>
+                  <ListItemIcon key={index} >
+                    <Link to={item.path}>
+                      <img src={Pin} style={{ width: "40px", height: "40px" }} />
+                    </Link>
+                  </ListItemIcon>
+                  <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                    <h2>{item.text}</h2>
+                  </Link>
+                </ListItem>
+              </div>)
+          })}
           <Divider style={{ backgroundColor: "#E42346", border: '1x solid' }} />
 
           <IconButton
