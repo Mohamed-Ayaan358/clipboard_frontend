@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Reports from './pages/Reports';
 import Products from './pages/Products';
 import SignIn from './pages/Signin';
-
+import Land from './pages/land'
 function App() {
     return (
         <>

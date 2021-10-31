@@ -19,10 +19,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { SidebarData } from './sidebar'
 import { makeStyles } from '@material-ui/core/styles';
-import Pin from './images/Logo.png'
+import Pin from './pages/images/Logo.png'
 import { padding } from '@mui/system';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ShareIcon from '@mui/icons-material/Share';
+import Land from './pages/land';
+import ReactDOM from 'react-dom';
+
 
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
@@ -45,15 +48,6 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
-
-// const DrawerHeader = styled('div')(({ theme }) => ({
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'flex-end',
-//   padding: theme.spacing(0, 1),
-//   // necessary for content to be below app bar
-//   ...theme.mixins.toolbar,
-// }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -98,15 +92,22 @@ export default function MiniDrawer() {
       path: '/',
       icon: <LogoutIcon />,
       cName: 'nav-text',
-      text: 'Logout'
-    },
-    {
-      titel: "ShareIcon",
-      path: '/',
-      icon: <ShareIcon />,
-      cName: 'nav-text',
-      text: 'Share'
-    }]
+      text: 'Logout',
+    }
+  ]
+
+  const ShareData = [{
+    titel: "ShareIcon",
+    path: '/',
+    icon: <ShareIcon />,
+    cName: 'nav-text',
+    text: 'Share'
+  }]
+
+
+  const returnhead = () => {
+    ReactDOM.render(<Land />, document.getElementById('root'));
+  }
 
   return (
 
@@ -173,6 +174,22 @@ export default function MiniDrawer() {
         </List>
 
         {LogoutheadData.map((item, index) => {
+          return (
+            <div >
+              <ListItem button key={item} sx={{ color: "#FFFFFF", top: "250px" }}>
+                <ListItemIcon key={index} >
+                  <Link to={item.path}>
+                    <IconButton onClick={returnhead} sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
+                  </Link>
+                </ListItemIcon>
+                <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                  <ListItemText primary={item.text} />
+                </Link>
+              </ListItem>
+            </div>
+          )
+        })}
+        {ShareData.map((item, index) => {
           return (
             <div >
               <ListItem button key={item} sx={{ color: "#FFFFFF", top: "250px" }}>
