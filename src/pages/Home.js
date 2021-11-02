@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import './pages.css';
 
 function Home() {
     return (
         <>
-            <h1 align="center">Home</h1>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, paddingLeft: "100px" }}>
+            <h1 id="head" >Home</h1>
+            <Box id="content" component="main" sx={{ flexGrow: 1, p: 3, paddingLeft: "100px" }}>
                 {/* <DrawerHeader /> */}
                 <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

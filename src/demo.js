@@ -25,7 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ShareIcon from '@mui/icons-material/Share';
 import Land from './pages/land';
 import ReactDOM from 'react-dom';
-
+import "./pages/pages.css"
 
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
@@ -114,29 +114,22 @@ export default function MiniDrawer() {
     <Box >
       <Drawer Drawer variant="permanent" open={open} PaperProps={{ sx: { backgroundColor: "#0D0C1D" } }} >
         <List>
-          {/* <h1 style={{
-            color: "#FFFFFF", display: "inline-block"
-          }}>Clipboard</h1> */}
-
           {MainheadData.map((item, index) => {
             return (
               <div  >
                 <ListItem button key={item} sx={{ color: "#FFFFFF" }}>
                   <ListItemIcon key={index} >
                     <Link to={item.path}>
-                      <img src={Pin} style={{ width: "40px", height: "40px" }} />
+                      <img id="logo2" src={Pin} />
                     </Link>
                   </ListItemIcon>
-                  <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                  <Link id="linklogo" to={item.path} >
                     <h2 style={{ fontFamily: "Roboto" }}>{item.text}</h2>
                   </Link>
                 </ListItem>
               </div>)
           })}
-          <Divider style={{
-            backgroundColor: "#E42346", border: '2x solid', borderBottomColor: "#E42346",
-            borderBottomWidth: 3
-          }} />
+          <Divider id="mini-divider" />
 
           <IconButton
             color="inherit"
@@ -165,7 +158,7 @@ export default function MiniDrawer() {
                       <IconButton sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
                     </Link>
                   </ListItemIcon>
-                  <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none", fontFamily: "Roboto" }}>
+                  <Link id="linklogo" to={item.path} >
                     <ListItemText primary={item.title} />
                   </Link>
                 </ListItem>
@@ -182,7 +175,7 @@ export default function MiniDrawer() {
                     <IconButton onClick={returnhead} sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
                   </Link>
                 </ListItemIcon>
-                <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                <Link id="linklogo" to={item.path} >
                   <ListItemText primary={item.text} />
                 </Link>
               </ListItem>
@@ -198,7 +191,7 @@ export default function MiniDrawer() {
                     <IconButton sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
                   </Link>
                 </ListItemIcon>
-                <Link to={item.path} style={{ color: "#FFFFFF", textDecoration: "none" }}>
+                <Link id="linklogo" to={item.path} >
                   <ListItemText primary={item.text} />
                 </Link>
               </ListItem>
