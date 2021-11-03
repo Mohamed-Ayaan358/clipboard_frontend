@@ -4,6 +4,7 @@
  *    P K Navin Shrinivas https://github.com/NavinShrinivas/
  */
 
+import MenuIcon from "@mui/icons-material/Menu";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
@@ -27,19 +28,19 @@ const drawerWidth = 240;
 const SidebarData = [
   {
     title: "Home",
-    path: "/",
+    path: "/home",
     icon: <DashboardIcon />,
     cName: "nav-text",
   },
   {
     title: "Calender",
-    path: "/reports",
+    path: "/calender",
     icon: <DateRangeIcon />,
     cName: "nav-text",
   },
   {
     title: "Folders",
-    path: "/products",
+    path: "/documents",
     icon: <FolderIcon />,
     cName: "nav-text",
   },
@@ -94,7 +95,6 @@ const Drawer = styled(MuiDrawer, {
 //
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -103,7 +103,9 @@ export default function Sidebar() {
     setOpen(false);
   };
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", "padding-top": "20px" }}>
+      <MenuIcon sx={{ color: "white" }} />
+
       <Drawer
         variant="permanent"
         open={open}
@@ -115,13 +117,15 @@ export default function Sidebar() {
         <Divider />
         <List>
           {SidebarData.map((text, index) => (
-            <ListItem button key={text} sx={{ color: "#FFFFFF" }}>
+            <ListItem button key={index} sx={{ color: "#FFFFFF" }}>
               <ListItemIcon>
                 <Link to={text.path}>
                   <IconButton sx={{ color: "white" }}>{text.icon}</IconButton>
                 </Link>
               </ListItemIcon>
-              <ListItemText primary={text.title} />
+              <Link to={text.path}>
+                <ListItemText primary={text.title} sx={{ color: "white" }} />
+              </Link>
             </ListItem>
           ))}
         </List>

@@ -1,15 +1,50 @@
 import "./App.css";
-import Sidebar from "./Sidebar.js";
-import { BrowserRouter as Router } from "react-router-dom";
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+//Problem is that it is overriding the script already there
+import Sidebar from "./Sidebar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-//plan for App.js , it permanently renders the sidebar , and we have a switch depending on path for rest
-//of the content
-//but we also have loginf and entry pages , hence the sidebar must also have a switch
+import Land from "./pages/land";
+import Home from "./pages/Home";
+import Calender from "./pages/Calender";
 function App() {
   return (
-    <Router>
-      <Sidebar />;
-    </Router>
+    <>
+      <Router>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <div>
+                <Land />
+              </div>
+            )}
+          />
+
+          <Route
+            path="/home"
+            render={() => (
+              <div>
+                <Sidebar />
+                <Home />
+              </div>
+            )}
+          />
+          <Route
+            path="/calender"
+            render={() => (
+              <div>
+                <Sidebar />
+                <Calender />
+              </div>
+            )}
+          />
+          {/* <Route path='/sign-in' component={SignIn} /> */}
+        </Switch>
+      </Router>
+    </>
   );
 }
 
