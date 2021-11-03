@@ -117,15 +117,17 @@ export default function Sidebar() {
         <Divider />
         <List>
           {SidebarData.map((text, index) => (
-            <ListItem button key={index} sx={{ color: "#FFFFFF" }}>
+            <ListItem
+              button
+              component={Link} //this is damn big brain
+              key={index}
+              sx={{ color: "#FFFFFF" }}
+              to={text.path}
+            >
               <ListItemIcon>
-                <Link to={text.path}>
-                  <IconButton sx={{ color: "white" }}>{text.icon}</IconButton>
-                </Link>
+                <IconButton sx={{ color: "white" }}>{text.icon}</IconButton>
               </ListItemIcon>
-              <Link to={text.path}>
-                <ListItemText primary={text.title} sx={{ color: "white" }} />
-              </Link>
+              <ListItemText primary={text.title} sx={{ color: "white" }} />
             </ListItem>
           ))}
         </List>
