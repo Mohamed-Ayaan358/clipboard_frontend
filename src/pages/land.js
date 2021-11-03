@@ -8,10 +8,12 @@ import Pin from './images/Logo.png';
 import ReactDOM from 'react-dom';
 import App from '../App'; //This is hella important to view it
 import "./pages.css";
+import { CSSTransition } from 'react-transition-group';
 
 function Land() {
 
     const returnmain = () => {
+
         ReactDOM.render(<App />, document.getElementById('root'));
     }
 
@@ -38,7 +40,9 @@ function Land() {
                     <br />What are you waiting for, get registered now!
                 </Typography>
                 <div style={{ paddingTop: "100px", textAlign: "center" }}>
-                    <button id="getstarted" onClick={returnmain} >Let's get started</button>
+                    <Link to="/home">
+                        <button id="getstarted"  >Let's get started</button>
+                    </Link>
                 </div>
             </Box>
 

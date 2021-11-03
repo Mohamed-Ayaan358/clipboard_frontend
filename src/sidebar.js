@@ -9,19 +9,19 @@ import FolderIcon from '@mui/icons-material/Folder';
 export const SidebarData = [
     {
         title: 'Home',
-        path: '/',
+        path: '/home',
         icon: <DashboardIcon />,
         cName: 'nav-text'
     },
     {
         title: 'Calender',
-        path: '/reports',
+        path: '/calender',
         icon: <DateRangeIcon />,
         cName: 'nav-text'
     },
     {
         title: 'Folders',
-        path: '/products',
+        path: '/folders',
         icon: <FolderIcon />,
         cName: 'nav-text'
     },

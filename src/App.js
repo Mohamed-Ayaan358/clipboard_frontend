@@ -4,21 +4,47 @@ import './App.css';
 //Problem is that it is overriding the script already there
 import Navbar from './demo';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import Home from './pages/Home';
-import Reports from './pages/Reports';
-import Products from './pages/Products';
-import SignIn from './pages/Signin';
+import Calender from './pages/calender';
+import Folders from './pages/folders';
 import Land from './pages/land'
+
+
 function App() {
     return (
         <>
             <Router>
-                <Navbar />
+
                 <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/reports' component={Reports} />
-                    <Route path='/products' component={Products} />
+                    <Route path="/" exact render={() => (
+                        <div>
+                            <Land />
+                        </div>
+                    )}
+                    />
+
+                    <Route path="/home" render={() => (
+                        <div>
+                            <Navbar />
+                            <Home />
+                        </div>
+                    )}
+                    />
+                    <Route path="/calender" render={() => (
+                        <div>
+                            <Navbar />
+                            <Calender />
+                        </div>
+                    )}
+                    />
+                    <Route path="/folders" render={() => (
+                        <div>
+                            <Navbar />
+                            <Folders />
+                        </div>
+                    )}
+                    />
+
                     {/* <Route path='/sign-in' component={SignIn} /> */}
                 </Switch>
             </Router>

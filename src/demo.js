@@ -105,9 +105,7 @@ export default function MiniDrawer() {
   }]
 
 
-  const returnhead = () => {
-    ReactDOM.render(<Land />, document.getElementById('root'));
-  }
+
 
   return (
 
@@ -172,7 +170,7 @@ export default function MiniDrawer() {
               <ListItem button key={item} sx={{ color: "#FFFFFF", top: "250px" }}>
                 <ListItemIcon key={index} >
                   <Link to={item.path}>
-                    <IconButton onClick={returnhead} sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
+                    <IconButton sx={{ color: "#FFFFFF" }}>{item.icon}</IconButton>
                   </Link>
                 </ListItemIcon>
                 <Link id="linklogo" to={item.path} >
