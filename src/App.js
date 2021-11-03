@@ -1,8 +1,8 @@
 import React from 'react';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 //Problem is that it is overriding the script already there
-import Navbar from './demo';
+import './App.css';
+import Navbar from './navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Calender from './pages/calender';

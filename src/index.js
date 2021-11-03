@@ -1,9 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { StyledEngineProvider } from '@mui/material/styles';
-import Demo from './demo';
 import App from './App';
-import Land from './pages/land';
 
 ReactDOM.render(
   <StyledEngineProvider injectFirst>

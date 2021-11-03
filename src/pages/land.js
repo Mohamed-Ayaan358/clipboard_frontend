@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Pin from './images/Logo.png';
+import Pin from '../images/Logo.png';
 import ReactDOM from 'react-dom';
 import App from '../App'; //This is hella important to view it
 import "./pages.css";
