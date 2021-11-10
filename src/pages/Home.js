@@ -5,7 +5,7 @@ import "./pages.css";
 
 function Home() {
   return (
-    <>
+    <div>
       <h1 id="head">Home</h1>
       <Box
         id="content"
@@ -43,9 +43,8 @@ function Home() {
           posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
       </Box>
-    </>
+    </div>
   );
 }
 
 export default Home;
-

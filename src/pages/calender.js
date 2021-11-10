@@ -1,19 +1,29 @@
-import React from "react";
 import Box from "@mui/material/Box";
-import "./pages.css";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import moment from "moment";
+import "./calender.css";
 
-function Calender() {
+function CalendarComp() {
+  const [dateState, setDateState] = useState(new Date());
+  const changeDate = (e) => {
+    setDateState(e);
+  };
   return (
-    <>
-      <h1 id="head">Calender</h1>
+    <div>
       <Box
         id="content"
         component="main"
         sx={{ flexGrow: 1, p: 3, paddingLeft: "100px" }}
-      ></Box>
-    </>
+      >
+        <Calendar value={dateState} onChange={changeDate} />
+        <p>
+          Current selected date is{" "}
+          <b>{moment(dateState).format("MMMM Do YYYY")}</b>
+        </p>
+      </Box>
+    </div>
   );
 }
-
-export default Calender;
-
+export default CalendarComp;

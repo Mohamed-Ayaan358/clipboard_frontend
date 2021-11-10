@@ -7,7 +7,7 @@ import "./pages.css";
 
 function Land() {
   return (
-    <>
+    <div>
       <div class="img-with-text">
         <img id="logo1" src={Pin} alt="main logo" />
         <h4 id="caption1">Clipboard</h4>
@@ -38,9 +38,8 @@ function Land() {
       <div id="bottom-bar" class="navbar">
         <p id="about-us"> About us &emsp;</p>
       </div>
-    </>
+    </div>
   );
 }
 
 export default Land;
-

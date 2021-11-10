@@ -79,7 +79,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -121,7 +121,7 @@ export default function MiniDrawer() {
   ];
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", "grid-gap": "20px" }}>
       <Drawer
         Drawer
         variant="permanent"
