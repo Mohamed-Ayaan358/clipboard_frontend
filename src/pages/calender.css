@@ -8,25 +8,27 @@
 }
 .react-calendar button{
     border-radius : 30px;
-    font-size : 35px;
+    font-size : 30px;
 }
 
 .mainbox{
-    padding-left : 30px;
-    padding-right : 30px;
+    padding-left : 7vh;
+    padding-right : 7vh;
 }
 
 .sleepingdiv{
     display : flex;
     grid-gap : 20px;
     padding : 20px;
+    max-height : 80vh;
 }
 
 .tolist{
     width : 50%;
     border-radius : 20px;
     background-color : #dfdbe5;
-    padding : 20px;
+    padding : 0px;
+    margin : 0px;
 }
 
 
