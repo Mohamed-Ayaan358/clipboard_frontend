@@ -5,10 +5,12 @@
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     border-radius: 20px;
+    min-height :0px;
+
 }
 .react-calendar button{
     border-radius : 30px;
-    font-size : 30px;
+    font-size : 1.3vw;
 }
 
 .mainbox{
@@ -20,15 +22,21 @@
     display : flex;
     grid-gap : 20px;
     padding : 20px;
-    max-height : 80vh;
+    max-height : 65vh;
 }
 
 .tolist{
+    position : relative;
     width : 50%;
     border-radius : 20px;
     background-color : #dfdbe5;
-    padding : 0px;
+    padding : 20px;
     margin : 0px;
+    list-style-type : none;
+}
+.list{
+    list-style-type : none;
+    padding : 0px;
 }
 
 
@@ -39,7 +47,23 @@
     padding : 20px;
     line-height : 15px;
     word-wrap: break-word;
+    max-height : 15vh;
 }
 .linebreak{
     word-wrap : break-word;
+}
+
+.standingdiv{
+    display : flex;
+    flex-direction : column;
+    min-height :100vh;
+    grid-gap : 15px;
+}
+.bottom{
+    position : absolute;
+    bottom : 10px;
+    border : 1px solid black;
+    margin : 10px;
+    padding : 20px;
+    border-radius : 20px;
 }

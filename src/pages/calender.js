@@ -19,29 +19,31 @@ function CalendarComp() {
   const [quote, setQuote] = useState(" ");
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("https://api.quotable.io/random");
+      const result = await fetch("https://quotes.rest/qod?language=en");
       const json = await result.json();
-      console.log(json);
-      setQuote(json);
+      console.log(json.contents.quotes[0]);
+      setQuote(json.contents.quotes[0]);
     };
     fetchData();
   }, []);
   return (
     <Box class="mainbox">
       <h1>Calender</h1>
-      <div class="sleepingdiv">
-        <Calendar value={dateState} onChange={changeDate} />
-        <p class="tolist">
-          <h2>To-Do {moment(dateState).format("MMMM Do YYYY")}</h2>
-          <ul>
-            <li>hello</li>
-          </ul>
-        </p>
-      </div>
-      <div class="dailyquote">
-        <h2>Quote of the day</h2>
-        <p class="linebreak">{quote.content}</p>
-        <p>- {quote.author}</p>
+      <div class="standingdiv">
+        <div class="sleepingdiv">
+          <Calendar value={dateState} onChange={changeDate} />
+          <p class="tolist">
+            <h2>To-Do {moment(dateState).format("MMMM Do YYYY")}</h2>
+            <ul class="list">
+              <li class="bottom">Add Work :(</li>
+            </ul>
+          </p>
+        </div>
+        <div class="dailyquote">
+          <h2>Quote of the day</h2>
+          <p class="linebreak">{quote.quote}</p>
+          <p>- {quote.author}</p>
+        </div>
       </div>
     </Box>
   );
