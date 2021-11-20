@@ -14,8 +14,8 @@ function Land() {
   return (
     <div>
       <div class="img-with-text">
-        <img id="logo1" src={Pin} alt="main logo" />
-        <h4 id="caption1">Clipboard</h4>
+        <img id="logo1" src={Pin} alt="main logo" style={{ paddingTop: "20px" }} />
+        <h4 id="caption1" style={{ paddingLeft: "10px" }}>Clipboard</h4>
       </div>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
