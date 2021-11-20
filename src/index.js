@@ -6,7 +6,7 @@ import App from "./App";
 import "./index.css";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+    uri: "https://navin.works:8443/graphql",
   cache: new InMemoryCache(),
 });
 
