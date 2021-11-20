@@ -30,6 +30,7 @@ function renderRow(props) {
 }
 function CalendarComp() {
   const [dateState, setDateState] = useState(new Date());
+  const [user, setUser] = useState(sessionStorage.getItem("user"));
   const changeDate = (e) => {
     setDateState(e);
   };
@@ -45,7 +46,10 @@ function CalendarComp() {
   }, []);
   return (
     <Box class="mainbox">
-      <h1>Calender</h1>
+      <div class="headerpad">
+        <h1 class="head">Calender</h1>
+        <h3 class="userinfo">{user}</h3>
+      </div>
       <div class="standingdiv">
         <div class="sleepingdiv">
           <Calendar value={dateState} onChange={changeDate} />
@@ -75,3 +79,11 @@ function CalendarComp() {
   );
 }
 export default CalendarComp;
+
+/*
+ * Very important part of all components
+ *<div class="headerpad">
+ *        <h1 class="head">Calender</h1>
+ *        <h3 class="userinfo">{user}</h3>
+ *      </div>
+ */

@@ -5,6 +5,11 @@ import Typography from "@mui/material/Typography";
 import Pin from "../images/Logo.png";
 import "./pages.css";
 
+function logIn() {
+  console.log("logged in");
+  sessionStorage.setItem("user", "admin");
+}
+
 function Land() {
   return (
     <div>
@@ -29,7 +34,9 @@ function Land() {
         </Typography>
         <div style={{ paddingTop: "100px", textAlign: "center" }}>
           <Link to="/home">
-            <button id="getstarted">Let's get started</button>
+            <button onClick={logIn} id="getstarted">
+              Let's get started
+            </button>
           </Link>
         </div>
       </Box>
@@ -43,3 +50,10 @@ function Land() {
 }
 
 export default Land;
+
+/*
+ *Line 32 handles logIn as of now , but this should be be done in login component
+ *But one this that remain same is saving the user token in session storage,
+ *    I really dont want to handle with the problems of local storage
+ *    as of now , assuming that the user is admin and password is always right
+ */

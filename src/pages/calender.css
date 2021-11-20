@@ -14,6 +14,8 @@
 }
 
 .mainbox{
+    display : flex;
+    flex-direction : column;
     padding-left : 7vh;
     padding-right : 7vh;
 }
@@ -79,3 +81,12 @@
     margin : 0px;
     list-style-type : none;
 }
+
+.head{
+    float : left;
+}
+.userinfo{
+    float : right;
+}
+
+

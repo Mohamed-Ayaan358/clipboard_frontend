@@ -5,10 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow : hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+@media only screen and (max-width: 1000px){
+    .mainbox{
+        padding-left : 1vh;
+        padding-right : 1vh;
+    }
+    .sleepingdiv{
+        flex-direction : column;
+    }
+    .react-calendar{
+        min-height : 0%;
+    }
 }
