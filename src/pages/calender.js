@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "./calender.css";
-
+import { useQuery, gql } from "@apollo/client";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -17,20 +17,42 @@ import { FixedSizeList } from "react-window";
  *
  */
 
+let globdata = [];
+
 function renderRow(props) {
   const { index, style } = props;
-
+  console.log(globdata[index]);
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
       <ListItemButton>
-        <ListItemText primary={`Item ${index + 1}`} />
+        <ListItemText>{globdata[index].title}</ListItemText>
       </ListItemButton>
     </ListItem>
   );
 }
+/*
+ *const testQuery = gql`
+ *  query GetTodos {
+ *    hello
+ *  }
+ *`;
+ */
+const TodoQuery = gql`
+  query GetTodos($username: String!, $searchdate: String!) {
+    getTodos(username: $username, searchdate: $searchdate) {
+      id
+      title
+      status
+      description
+      createdAt
+      date
+    }
+  }
+`;
+
 function CalendarComp() {
   const [dateState, setDateState] = useState(new Date());
-  const [user, setUser] = useState(sessionStorage.getItem("user"));
+  const [user] = useState(sessionStorage.getItem("user"));
   const changeDate = (e) => {
     setDateState(e);
   };
@@ -44,6 +66,30 @@ function CalendarComp() {
     };
     fetchData();
   }, []);
+  console.log(moment(dateState).format("DDMMYYYY").toString());
+  const { loading, data, error } = useQuery(TodoQuery, {
+    variables: {
+      username: user.toString(),
+      searchdate: moment(dateState).format("DDMMYYYY").toString(),
+    },
+  });
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
+  if (error) {
+    return <h1>Oops!Err!!!!</h1>;
+  }
+
+  //the below if cond is becus I was gettign 2 queries during startup
+  //and one always giving undef , and gettin object props on them crashed the
+  //app
+  let len = 0;
+  if (data !== undefined) {
+    console.log(data);
+    len = data.getTodos.length;
+    globdata = data.getTodos;
+  }
+
   return (
     <Box class="mainbox">
       <div class="headerpad">
@@ -60,7 +106,7 @@ function CalendarComp() {
                 <FixedSizeList
                   height={400}
                   itemSize={46}
-                  itemCount={200}
+                  itemCount={len}
                   overscanCount={5}
                 >
                   {renderRow}

@@ -23,5 +23,6 @@ code {
     }
     .react-calendar{
         min-height : 0%;
+        width : 100%;
     }
 }

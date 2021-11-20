@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "-": "^0.0.1",
+    "@apollo/client": "^3.4.17",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
@@ -16,6 +17,7 @@
     "@testing-library/user-event": "^12.1.10",
     "classnames": "^2.3.1",
     "date-fns": "^2.25.0",
+    "graphql": "^15.7.2",
     "group": "^1.0.2",
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.29.1",
