@@ -51,11 +51,6 @@ const TodoQuery = gql`
 `;
 
 function CalendarComp() {
-  const [dateState, setDateState] = useState(new Date());
-  const [user] = useState(sessionStorage.getItem("user"));
-  const changeDate = (e) => {
-    setDateState(e);
-  };
   const [quote, setQuote] = useState(" ");
   React.useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +61,12 @@ function CalendarComp() {
     };
     fetchData();
   }, []);
-  console.log(moment(dateState).format("DDMMYYYY").toString());
+  const [dateState, setDateState] = useState(new Date());
+  const [user] = useState(sessionStorage.getItem("user"));
+  const changeDate = (e) => {
+    setDateState(e);
+  };
+
   const { loading, data, error } = useQuery(TodoQuery, {
     variables: {
       username: user.toString(),
