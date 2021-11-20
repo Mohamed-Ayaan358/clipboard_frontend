@@ -64,7 +64,7 @@ function CalendarComp() {
       console.log(json.contents.quotes[0]);
       setQuote(json.contents.quotes[0]);
     };
-    fetchData();
+    fetchData(); //Calls Function
   }, []);
   console.log(moment(dateState).format("DDMMYYYY").toString());
   const { loading, data, error } = useQuery(TodoQuery, {
@@ -80,7 +80,7 @@ function CalendarComp() {
     return <h1>Oops!Err!!!!</h1>;
   }
 
-  //the below if cond is becus I was gettign 2 queries during startup
+  //the below if cond is becus I was gettig 2 queries during startup
   //and one always giving undef , and gettin object props on them crashed the
   //app
   let len = 0;
