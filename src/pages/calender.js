@@ -65,18 +65,15 @@ const AddTodo = gql`
 function CalendarComp() {
   let [globdata, updateGlob] = useState([]);
   let [len, setLen] = useState(0);
-  /*
-   *const [quote, setQuote] = useState(" ");
-   *React.useEffect(() => {
-   *  const fetchData = async () => {
-   *    const result = await fetch("https://quotes.rest/qod?language=en");
-   *    const json = await result.json();
-   *    console.log(json.contents.quotes[0]);
-   *    setQuote(json.contents.quotes[0]);
-   *  };
-   *  fetchData(); //Calls Function
-   *}, []);
-   */
+  const [quote, setQuote] = useState(" ");
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch("https://quotes.rest/qod?language=en");
+      const json = await result.json();
+      setQuote(json.contents.quotes[0]);
+    };
+    fetchData(); //Calls Function
+  }, []);
   const [dateState, setDateState] = useState(new Date());
   const [user] = useState(sessionStorage.getItem("user"));
   const changeDate = (e) => {
@@ -90,7 +87,6 @@ function CalendarComp() {
     },
     fetchPolicy: "no-cache",
     onCompleted: async (data) => {
-      console.log(data);
       await updateGlob(data.getTodos);
       setLen(data.getTodos.length);
     },
@@ -105,13 +101,9 @@ function CalendarComp() {
   const [description, setDescription] = useState("");
   const [addTodo, { dat }] = useMutation(AddTodo, {
     onCompleted: async (dat) => {
-      console.log("Added");
-      console.log(dat);
       let newglob = [...globdata];
       await newglob.push(dat.AddTodo);
       await updatelist(newglob);
-      console.log("new glob : ", newglob);
-      console.log("glob dat : ", globdata);
     },
   });
 
@@ -140,7 +132,6 @@ function CalendarComp() {
 
   let renderRow = function renderRow(props) {
     const { index, style } = props;
-    console.log(props);
     return (
       <ListItem style={style} key={index} component="div" disablePadding>
         <ListItemButton>
@@ -185,7 +176,6 @@ function CalendarComp() {
                   />
                   <button
                     onClick={() => {
-                      console.log(title);
                       addTodo({
                         variables: {
                           username: user,
@@ -205,8 +195,8 @@ function CalendarComp() {
             </div>
             <div class="dailyquote">
               <h4>Quote of the day</h4>
-              <p class="linebreak">"ehllo"</p>
-              <p>-</p>
+              <p class="linebreak">{quote.quote}</p>
+              <p>- {quote.author}</p>
             </div>
           </div>
         </div>
