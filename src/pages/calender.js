@@ -99,6 +99,8 @@ function CalendarComp() {
     updateGlob(data);
     setLen(globdata.length + 1);
   }
+  let dummy = data; //else if gives warning ans netlify fails
+  console.log(dummy);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [addTodo, { dat }] = useMutation(AddTodo, {
