@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "./calender.css";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -50,6 +50,31 @@ const TodoQuery = gql`
   }
 `;
 
+const AddTodo = gql`
+  mutation AddTodo(
+    $username: String!
+    $title: String!
+    $description: String!
+    $status: Boolean!
+    $date: String!
+  ) {
+    AddTodo(
+      username: $username
+      title: $title
+      description: $description
+      status: $status
+      date: $date
+    ) {
+      title
+      description
+      status
+      createdAt
+      date
+      id
+    }
+  }
+`;
+
 function CalendarComp() {
   const [quote, setQuote] = useState(" ");
   React.useEffect(() => {
@@ -73,6 +98,16 @@ function CalendarComp() {
       searchdate: moment(dateState).format("DDMMYYYY").toString(),
     },
   });
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [addTodo, { dat }] = useMutation(AddTodo);
+
+  const handleTitle = (event) => {
+    setTitle(event.target.value);
+  };
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
   if (loading) {
     return <h1>Loading</h1>;
   }
@@ -89,6 +124,16 @@ function CalendarComp() {
     len = data.getTodos.length;
     globdata = data.getTodos;
   }
+
+  //Below is to handle mutations , i.e adding new work on user disablePadding
+  //ref :
+  /*
+   *$userId: ID!
+   * $title: String!
+   * $description: String!
+   * $status: Boolean!
+   * $date: String!
+   */
 
   return (
     <Box class="mainbox">
@@ -111,6 +156,35 @@ function CalendarComp() {
                 >
                   {renderRow}
                 </FixedSizeList>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    onChange={handleTitle}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Description"
+                    onChange={handleDescription}
+                  />
+                  <button
+                    onClick={() => {
+                      console.log(title);
+                      addTodo({
+                        variables: {
+                          username: user,
+                          title: title,
+                          description: description,
+                          status: false,
+                          date: moment(dateState).format("DDMMYYYY").toString(),
+                        },
+                      });
+                      console.log(dat);
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
             </div>
             <div class="dailyquote">
