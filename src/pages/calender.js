@@ -17,19 +17,6 @@ import { FixedSizeList } from "react-window";
  *
  */
 
-let globdata = [];
-
-function renderRow(props) {
-  const { index, style } = props;
-  console.log(globdata[index]);
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        <ListItemText>{globdata[index].title}</ListItemText>
-      </ListItemButton>
-    </ListItem>
-  );
-}
 /*
  *const testQuery = gql`
  *  query GetTodos {
@@ -76,16 +63,20 @@ const AddTodo = gql`
 `;
 
 function CalendarComp() {
-  const [quote, setQuote] = useState(" ");
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch("https://quotes.rest/qod?language=en");
-      const json = await result.json();
-      console.log(json.contents.quotes[0]);
-      setQuote(json.contents.quotes[0]);
-    };
-    fetchData(); //Calls Function
-  }, []);
+  let [globdata, updateGlob] = useState([]);
+  let [len, setLen] = useState(0);
+  /*
+   *const [quote, setQuote] = useState(" ");
+   *React.useEffect(() => {
+   *  const fetchData = async () => {
+   *    const result = await fetch("https://quotes.rest/qod?language=en");
+   *    const json = await result.json();
+   *    console.log(json.contents.quotes[0]);
+   *    setQuote(json.contents.quotes[0]);
+   *  };
+   *  fetchData(); //Calls Function
+   *}, []);
+   */
   const [dateState, setDateState] = useState(new Date());
   const [user] = useState(sessionStorage.getItem("user"));
   const changeDate = (e) => {
@@ -97,10 +88,30 @@ function CalendarComp() {
       username: user.toString(),
       searchdate: moment(dateState).format("DDMMYYYY").toString(),
     },
+    fetchPolicy: "no-cache",
+    onCompleted: async (data) => {
+      console.log(data);
+      await updateGlob(data.getTodos);
+      setLen(data.getTodos.length);
+    },
   });
+  async function updatelist(data) {
+    updateGlob(data);
+    setLen(globdata.length + 1);
+  }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [addTodo, { dat }] = useMutation(AddTodo);
+  const [addTodo, { dat }] = useMutation(AddTodo, {
+    onCompleted: async (dat) => {
+      console.log("Added");
+      console.log(dat);
+      let newglob = [...globdata];
+      await newglob.push(dat.AddTodo);
+      await updatelist(newglob);
+      console.log("new glob : ", newglob);
+      console.log("glob dat : ", globdata);
+    },
+  });
 
   const handleTitle = (event) => {
     setTitle(event.target.value);
@@ -115,16 +126,6 @@ function CalendarComp() {
     return <h1>Oops!Err!!!!</h1>;
   }
 
-  //the below if cond is becus I was gettig 2 queries during startup
-  //and one always giving undef , and gettin object props on them crashed the
-  //app
-  let len = 0;
-  if (data !== undefined) {
-    console.log(data);
-    len = data.getTodos.length;
-    globdata = data.getTodos;
-  }
-
   //Below is to handle mutations , i.e adding new work on user disablePadding
   //ref :
   /*
@@ -134,6 +135,18 @@ function CalendarComp() {
    * $status: Boolean!
    * $date: String!
    */
+
+  let renderRow = function renderRow(props) {
+    const { index, style } = props;
+    console.log(props);
+    return (
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItemButton>
+          <ListItemText>{globdata[index].title}</ListItemText>
+        </ListItemButton>
+      </ListItem>
+    );
+  };
 
   return (
     <Box class="mainbox">
@@ -153,6 +166,7 @@ function CalendarComp() {
                   itemSize={46}
                   itemCount={len}
                   overscanCount={5}
+                  list={globdata}
                 >
                   {renderRow}
                 </FixedSizeList>
@@ -189,8 +203,8 @@ function CalendarComp() {
             </div>
             <div class="dailyquote">
               <h4>Quote of the day</h4>
-              <p class="linebreak">{quote.quote}</p>
-              <p>- {quote.author}</p>
+              <p class="linebreak">"ehllo"</p>
+              <p>-</p>
             </div>
           </div>
         </div>
