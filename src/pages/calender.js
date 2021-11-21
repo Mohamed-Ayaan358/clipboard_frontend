@@ -88,7 +88,9 @@ function CalendarComp() {
     fetchPolicy: "no-cache",
     onCompleted: async (data) => {
       await updateGlob(data.getTodos);
-      setLen(data.getTodos.length);
+      await setLen(data.getTodos.length);
+      if (data.getTodos.length === 0) setLen(0);
+      else setLen(data.getTodos.length);
     },
   });
   async function updatelist(data) {
@@ -132,6 +134,7 @@ function CalendarComp() {
 
   let renderRow = function renderRow(props) {
     const { index, style } = props;
+    if (globdata[index] === undefined) return null;
     return (
       <ListItem style={style} key={index} component="div" disablePadding>
         <ListItemButton>
