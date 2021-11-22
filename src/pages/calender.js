@@ -85,7 +85,6 @@ function CalendarComp() {
       username: user.toString(),
       searchdate: moment(dateState).format("DDMMYYYY").toString(),
     },
-    fetchPolicy: "no-cache",
     onCompleted: async (data) => {
       await updateGlob(data.getTodos);
       await setLen(data.getTodos.length);
@@ -166,30 +165,51 @@ function CalendarComp() {
                 >
                   {renderRow}
                 </FixedSizeList>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Title"
-                    onChange={handleTitle}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Description"
-                    onChange={handleDescription}
-                  />
+                <div class="addwork">
+                  <div class="col-3">
+                    <input
+                      class="effect-8"
+                      type="text"
+                      placeholder="Work Title"
+                      onChange={handleTitle}
+                    />
+                    <span class="focus-border">
+                      <i></i>
+                    </span>
+                  </div>
+                  <div class="col-3">
+                    <input
+                      class="effect-8"
+                      type="text"
+                      placeholder="Work Description"
+                      onChange={handleDescription}
+                    />
+                    <span class="focus-border">
+                      <i></i>
+                    </span>
+                  </div>
                   <button
                     onClick={() => {
-                      addTodo({
-                        variables: {
-                          username: user,
-                          title: title,
-                          description: description,
-                          status: false,
-                          date: moment(dateState).format("DDMMYYYY").toString(),
-                        },
-                      });
+                      if (title === "" || description === "") {
+                        alert("Please fill all the fields");
+                      } else {
+                        addTodo({
+                          variables: {
+                            username: user.toString(),
+                            title: title,
+                            description: description,
+                            status: false,
+                            date: moment(dateState)
+                              .format("DDMMYYYY")
+                              .toString(),
+                          },
+                        });
+                        setTitle("");
+                        setDescription("");
+                      }
                       console.log(dat);
                     }}
+                    class="subbut"
                   >
                     Add
                   </button>
