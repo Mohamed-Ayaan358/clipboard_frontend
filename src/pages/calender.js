@@ -114,12 +114,6 @@ function CalendarComp() {
   const handleDescription = (event) => {
     setDescription(event.target.value);
   };
-  if (loading) {
-    return <h1>Loading</h1>;
-  }
-  if (error) {
-    return <h1>Oops!Err!!!!</h1>;
-  }
 
   //Below is to handle mutations , i.e adding new work on user disablePadding
   //ref :
@@ -134,6 +128,12 @@ function CalendarComp() {
   let renderRow = function renderRow(props) {
     const { index, style } = props;
     if (globdata[index] === undefined) return null;
+    if (loading) {
+      return <p>Loading...Hang in there, we are fetching your data!</p>;
+    }
+    if (error) return <p>Oops!Something went wrong :(</p>;
+    if (len === 0)
+      return <p>Bzzz...Doesn't seem like you have anything planned :0</p>;
     return (
       <ListItem style={style} key={index} component="div" disablePadding>
         <ListItemButton>
