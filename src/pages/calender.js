@@ -216,12 +216,12 @@ function CalendarComp() {
                 </div>
               </div>
             </div>
-            <div class="dailyquote">
-              <h4>Quote of the day</h4>
-              <p class="linebreak">{quote.quote}</p>
-              <p>- {quote.author}</p>
-            </div>
           </div>
+        </div>
+        <div class="dailyquote">
+          <h4>Quote of the day</h4>
+          <p class="linebreak">{quote.quote}</p>
+          <p>- {quote.author}</p>
         </div>
       </div>
     </Box>
