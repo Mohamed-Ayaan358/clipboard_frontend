@@ -116,18 +116,22 @@ display: flex;
     display : flex;
     grid-gap : 15px;
     justify-content : space-around;
+    flex-direction : column;
 }
 
 
 
 
-.col-3{float: left; width: 27.33%; position: relative;}
+.col-3{
+    float: left;
+    position: relative;
+}
 
 input[type="text"]{
     font-size : 19px;
     background-color : transparent;
     color:white; 
-    width: 25vh; 
+    width: 100%; 
     box-sizing: border-box;
     letter-spacing: 1px;
     border-radius : 20px;
@@ -138,8 +142,13 @@ input[type="text"]{
 
 
 .subbut{
-    padding-left : 15px;
-    padding-right : 15px;
+    padding : 20px;
+    border-radius : 20px;
+    background-color : transparent;
+    border-radius : 3px solid;
+    border-color : #E42346;
+    color : white;
+    font-size : 25px;
 }
 
 

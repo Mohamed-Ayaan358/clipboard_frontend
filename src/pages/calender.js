@@ -70,7 +70,12 @@ function CalendarComp() {
     const fetchData = async () => {
       const result = await fetch("https://quotes.rest/qod?language=en");
       const json = await result.json();
-      setQuote(json.contents.quotes[0]);
+      console.log(json);
+      if (json.contents === undefined) {
+        setQuote("No quote available");
+      } else {
+        setQuote(json.contents.quotes[0]);
+      }
     };
     fetchData(); //Calls Function
   }, []);
@@ -85,6 +90,7 @@ function CalendarComp() {
       username: user.toString(),
       searchdate: moment(dateState).format("DDMMYYYY").toString(),
     },
+    fetchPolicy: "no-cache",
     onCompleted: async (data) => {
       await updateGlob(data.getTodos);
       await setLen(data.getTodos.length);
@@ -165,54 +171,57 @@ function CalendarComp() {
                 >
                   {renderRow}
                 </FixedSizeList>
-                <div class="addwork">
-                  <div class="col-3">
-                    <input
-                      class="effect-8"
-                      type="text"
-                      placeholder="Work Title"
-                      onChange={handleTitle}
-                    />
-                    <span class="focus-border">
-                      <i></i>
-                    </span>
-                  </div>
-                  <div class="col-3">
-                    <input
-                      class="effect-8"
-                      type="text"
-                      placeholder="Work Description"
-                      onChange={handleDescription}
-                    />
-                    <span class="focus-border">
-                      <i></i>
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => {
-                      if (title === "" || description === "") {
-                        alert("Please fill all the fields");
-                      } else {
-                        addTodo({
-                          variables: {
-                            username: user.toString(),
-                            title: title,
-                            description: description,
-                            status: false,
-                            date: moment(dateState)
-                              .format("DDMMYYYY")
-                              .toString(),
-                          },
-                        });
-                        setTitle("");
-                        setDescription("");
-                      }
-                      console.log(dat);
-                    }}
-                    class="subbut"
-                  >
-                    Add
-                  </button>
+                <div>
+                  <form class="addwork">
+                    <div class="col-3">
+                      <input
+                        class="effect-8"
+                        type="text"
+                        placeholder="Work Title"
+                        onChange={handleTitle}
+                      />
+                      <span class="focus-border">
+                        <i></i>
+                      </span>
+                    </div>
+                    <div class="col-3">
+                      <input
+                        class="effect-8"
+                        type="text"
+                        placeholder="Work Description"
+                        onChange={handleDescription}
+                      />
+                      <span class="focus-border">
+                        <i></i>
+                      </span>
+                    </div>
+                    <button
+                      type="submit"
+                      onClick={() => {
+                        if (title === "" || description === "") {
+                          alert("Please fill all the fields");
+                        } else {
+                          addTodo({
+                            variables: {
+                              username: user.toString(),
+                              title: title,
+                              description: description,
+                              status: false,
+                              date: moment(dateState)
+                                .format("DDMMYYYY")
+                                .toString(),
+                            },
+                          });
+                          setTitle("");
+                          setDescription("");
+                        }
+                        console.log(dat);
+                      }}
+                      class="subbut"
+                    >
+                      Add
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
