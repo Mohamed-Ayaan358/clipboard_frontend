@@ -1,3 +1,4 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
 import Calendar from "react-calendar";
@@ -130,7 +131,9 @@ function CalendarComp() {
    * $status: Boolean!
    * $date: String!
    */
-
+  function deleteTodo(e) {
+    console.log("hello", e);
+  }
   let renderRow = function renderRow(props) {
     const { index, style } = props;
     if (globdata[index] === undefined) return null;
@@ -144,6 +147,9 @@ function CalendarComp() {
       <ListItem style={style} key={index} component="div" disablePadding>
         <ListItemButton>
           <ListItemText>{globdata[index].title}</ListItemText>
+          <button class="deleteicon" key={index} onClick={deleteTodo}>
+            <DeleteIcon />
+          </button>
         </ListItemButton>
       </ListItem>
     );
