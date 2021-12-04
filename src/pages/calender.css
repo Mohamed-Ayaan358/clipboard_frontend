@@ -29,9 +29,10 @@
 
 
 .mainbox{
+    width:100%;
 display: flex;
     flex-direction: column;
-    padding-left: 13%;
+    padding-left: 7%;
     padding-right: 10%;
 }
 

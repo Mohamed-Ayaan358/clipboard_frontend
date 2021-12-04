@@ -63,6 +63,22 @@ const AddTodo = gql`
   }
 `;
 
+const DeleteTodo = gql`
+  mutation Mutation($deleteTodoId: ID!, $username: String) {
+    DeleteTodo(id: $deleteTodoId, username: $username) {
+      title
+      description
+      status
+      createdAt
+      date
+      id
+    }
+  }
+`;
+
+//the date in the above gql syntax is pretty not needed , but it has to return something
+//so here it is
+
 function CalendarComp() {
   let [globdata, updateGlob] = useState([]);
   let [len, setLen] = useState(0);
@@ -114,6 +130,11 @@ function CalendarComp() {
       await updatelist(newglob);
     },
   });
+  const [deleteTodo, { returndata }] = useMutation(DeleteTodo, {
+    onCompleted: async () => {
+      console.log(returndata);
+    },
+  });
 
   const handleTitle = (event) => {
     setTitle(event.target.value);
@@ -131,9 +152,11 @@ function CalendarComp() {
    * $status: Boolean!
    * $date: String!
    */
-  function deleteTodo(e) {
-    console.log("hello", e);
-  }
+  /*
+   *function deleteTodo(e) {
+   *  console.log("hello", e);
+   *}
+   */
   let renderRow = function renderRow(props) {
     const { index, style } = props;
     if (globdata[index] === undefined) return null;
@@ -147,14 +170,32 @@ function CalendarComp() {
       <ListItem style={style} key={index} component="div" disablePadding>
         <ListItemButton>
           <ListItemText>{globdata[index].title}</ListItemText>
-          <button class="deleteicon" key={index} onClick={deleteTodo}>
+          <button
+            class="deleteicon"
+            key={index}
+            onClick={() => {
+              //arrwo fn must , its the easiest way to pass the index
+              console.log(
+                "deleting : ",
+                globdata[index].id,
+                " title : ",
+                globdata[index].title
+              );
+              deleteTodo({
+                variables: {
+                  deleteTodoId: globdata[index].id,
+                  username: user.toString(),
+                },
+              });
+              globdata.splice(index);
+            }}
+          >
             <DeleteIcon />
           </button>
         </ListItemButton>
       </ListItem>
     );
   };
-
   return (
     <Box class="mainbox">
       <div class="headerpad">
@@ -185,6 +226,7 @@ function CalendarComp() {
                         type="text"
                         placeholder="Work Title"
                         onChange={handleTitle}
+                        value={title} //neat little way to clear text field without refresh
                       />
                       <span class="focus-border">
                         <i></i>
@@ -196,6 +238,7 @@ function CalendarComp() {
                         type="text"
                         placeholder="Work Description"
                         onChange={handleDescription}
+                        value={description}
                       />
                       <span class="focus-border">
                         <i></i>
@@ -203,7 +246,7 @@ function CalendarComp() {
                     </div>
                     <button
                       type="submit"
-                      onClick={() => {
+                      onClick={(e) => {
                         if (title === "" || description === "") {
                           alert("Please fill all the fields");
                         } else {
@@ -220,6 +263,7 @@ function CalendarComp() {
                           });
                           setTitle("");
                           setDescription("");
+                          e.preventDefault();
                         }
                         console.log(dat);
                       }}
