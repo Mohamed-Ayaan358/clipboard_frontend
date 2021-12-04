@@ -187,7 +187,7 @@ function CalendarComp() {
                   username: user.toString(),
                 },
               });
-              globdata.splice(index);
+              globdata.splice(index, 1);
             }}
           >
             <DeleteIcon />
