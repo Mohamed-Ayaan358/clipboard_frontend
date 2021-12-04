@@ -40,9 +40,6 @@ display: flex;
     display: flex;
     grid-gap: 20px;
 }
-.css-cvhtoe-MuiButtonBase-root-MuiListItemButton-root,.css-e0yuwi{
-    border-bottom: 2px solid #E42346;
-}
 
 .tolist{
     position : relative;
@@ -166,4 +163,10 @@ input[type="text"]{
   color: #E42346;
 }
 
-
+.MuiListItemText-secondary{
+    color : white;
+}
+.css-1nxmd3h-MuiListItem-root{
+    border-bottom : 2px solid #E42346;
+    padding : 15px;
+}

@@ -7,7 +7,6 @@ import moment from "moment";
 import "./calender.css";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 /*
@@ -168,31 +167,33 @@ function CalendarComp() {
       return <p>Bzzz...Doesn't seem like you have anything planned :0</p>;
     return (
       <ListItem style={style} key={index} component="div" disablePadding>
-        <ListItemButton>
-          <ListItemText>{globdata[index].title}</ListItemText>
-          <button
-            class="deleteicon"
-            key={index}
-            onClick={() => {
-              //arrwo fn must , its the easiest way to pass the index
-              console.log(
-                "deleting : ",
-                globdata[index].id,
-                " title : ",
-                globdata[index].title
-              );
-              deleteTodo({
-                variables: {
-                  deleteTodoId: globdata[index].id,
-                  username: user.toString(),
-                },
-              });
-              globdata.splice(index, 1);
-            }}
-          >
-            <DeleteIcon />
-          </button>
-        </ListItemButton>
+        <ListItemText
+          primary={globdata[index].title}
+          secondary={globdata[index].description}
+          style={{ color: "white" }}
+        />
+        <button
+          class="deleteicon"
+          key={index}
+          onClick={() => {
+            //arrwo fn must , its the easiest way to pass the index
+            console.log(
+              "deleting : ",
+              globdata[index].id,
+              " title : ",
+              globdata[index].title
+            );
+            deleteTodo({
+              variables: {
+                deleteTodoId: globdata[index].id,
+                username: user.toString(),
+              },
+            });
+            globdata.splice(index, 1);
+          }}
+        >
+          <DeleteIcon />
+        </button>
       </ListItem>
     );
   };
@@ -215,6 +216,7 @@ function CalendarComp() {
                   itemCount={len}
                   overscanCount={5}
                   list={globdata}
+                  sx={{ color: "white" }}
                 >
                   {renderRow}
                 </FixedSizeList>
