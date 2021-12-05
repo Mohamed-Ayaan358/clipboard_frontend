@@ -158,7 +158,9 @@ function CalendarComp() {
    *  console.log("hello", e);
    *}
    */
+
   const [deleted, setDeleted] = useState(false);
+  const [added, setAdded] = useState(false);
   let renderRow = function renderRow(props) {
     const { index, style } = props;
     if (globdata[index] === undefined) return null;
@@ -194,6 +196,9 @@ function CalendarComp() {
             });
             globdata.splice(index, 1);
             setDeleted(true);
+            setTimeout(() => {
+              setDeleted(false);
+            }, 6000);
           }}
         >
           <DeleteIcon />
@@ -205,6 +210,9 @@ function CalendarComp() {
     <Box class="mainbox">
       {deleted ? (
         <Notification heading="Deleted!" description="Todo has been deleted." />
+      ) : null}
+      {added ? (
+        <Notification heading="Added!" description="Todo has been added." />
       ) : null}
       <div class="headerpad">
         <h1 class="head">Calender</h1>
@@ -272,6 +280,10 @@ function CalendarComp() {
                           });
                           setTitle("");
                           setDescription("");
+                          setAdded(true);
+                          setTimeout(() => {
+                            setAdded(false);
+                          }, 6000);
                           e.preventDefault();
                         }
                         console.log(dat);
