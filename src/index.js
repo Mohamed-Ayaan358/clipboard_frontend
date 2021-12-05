@@ -1,9 +1,11 @@
 import * as React from "react";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { Auth0ProviderWithHistory } from './auth';
 import ReactDOM from "react-dom";
 import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./App";
 import "./index.css";
+
 const cache = new InMemoryCache({
   typePolicies: {
     User: {
@@ -14,8 +16,8 @@ const cache = new InMemoryCache({
     },
   },
 });
+
 const client = new ApolloClient({
-  //uri: "https://navin.works:8443/graphql",
   uri: "https://navin.works:8443/graphql",
   cache: cache,
 });
@@ -23,7 +25,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <StyledEngineProvider injectFirst>
-      <App />
+      <Auth0ProviderWithHistory>
+        <App />
+      </Auth0ProviderWithHistory>
       {/* <Land /> */}
       {/* This must be the main thing here and have a link to het started on it to take */}
     </StyledEngineProvider>

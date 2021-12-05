@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -12,13 +13,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Pin from "./images/Logo.png";
+import Pin from "../images/Logo.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ShareIcon from "@mui/icons-material/Share";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import FolderIcon from "@mui/icons-material/Folder";
-import "./pages/pages.css";
+import "../pages/pages.css";
 const SidebarData = [
   {
     title: "Home",
@@ -27,8 +28,8 @@ const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Calender",
-    path: "/calender",
+    title: "Calendar",
+    path: "/calendar",
     icon: <DateRangeIcon />,
     cName: "nav-text",
   },
@@ -82,6 +83,7 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { logout } = useAuth0();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -187,11 +189,21 @@ export default function MiniDrawer(props) {
           })}
         </List>
 
+
         {LogoutheadData.map((item, index) => {
           return (
             <div>
               <ListItem
                 button
+                onClick={() => {
+                  sessionStorage.removeItem("user");
+                  sessionStorage.removeItem("nickname");
+                  sessionStorage.removeItem("id");
+                  logout({
+                    returnTo: window.location.origin,
+                  });
+                }
+                }
                 key={item}
                 sx={{ color: "#FFFFFF", top: "250px" }}
               >

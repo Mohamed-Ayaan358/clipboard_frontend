@@ -1,17 +1,19 @@
 import React from "react";
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-//Problem is that it is overriding the script already there
-import "./App.css";
-import Navbar from "./navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import CalenderComp from "./pages/calender";
-import Folders from "./pages/folders";
-import Land from "./pages/land";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Loading, Navbar } from "./components";
+import { ProtectedRoute } from "./auth"
+import { Home, CalendarComp, Folders, Land, notFound } from "./pages"
 
 function App() {
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return (<Loading />)
+  }
+
   return (
-    <div>
+    <>
       <Router>
         <Switch>
           <Route
@@ -24,27 +26,29 @@ function App() {
             )}
           />
 
-          <Route
+          <ProtectedRoute
             path="/home"
-            render={() => (
+            component={() => (
               <div class="barcontent">
                 <Navbar content={Home} />
                 <Home />
               </div>
             )}
           />
-          <Route
-            path="/calender"
-            render={() => (
+
+          <ProtectedRoute
+            path="/calendar"
+            component={() => (
               <div class="barcontent">
                 <Navbar />
-                <CalenderComp />
+                <CalendarComp />
               </div>
             )}
           />
-          <Route
+
+          <ProtectedRoute
             path="/folders"
-            render={() => (
+            component={() => (
               <div class="barcontent">
                 <Navbar />
                 <Folders />
@@ -52,10 +56,10 @@ function App() {
             )}
           />
 
-          {/* <Route path='/sign-in' component={SignIn} /> */}
+          <Route path="" component={notFound} />
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 
