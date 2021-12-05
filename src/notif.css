@@ -1,0 +1,15 @@
+.floatright {
+    float: left;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+
+.notifbutton{
+    width: 300px;
+    text-align: left;
+     background-color: #0D0C1D;
+    color : white;
+
+}

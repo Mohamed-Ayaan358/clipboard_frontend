@@ -9,6 +9,8 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
+import Notification from "../notif";
+
 /*
  *  <p>
  *          Current selected date is{" "}
@@ -156,6 +158,7 @@ function CalendarComp() {
    *  console.log("hello", e);
    *}
    */
+  const [deleted, setDeleted] = useState(false);
   let renderRow = function renderRow(props) {
     const { index, style } = props;
     if (globdata[index] === undefined) return null;
@@ -190,6 +193,7 @@ function CalendarComp() {
               },
             });
             globdata.splice(index, 1);
+            setDeleted(true);
           }}
         >
           <DeleteIcon />
@@ -199,6 +203,9 @@ function CalendarComp() {
   };
   return (
     <Box class="mainbox">
+      {deleted ? (
+        <Notification heading="Deleted!" description="Todo has been deleted." />
+      ) : null}
       <div class="headerpad">
         <h1 class="head">Calender</h1>
         <h3 class="userinfo">{user}</h3>
