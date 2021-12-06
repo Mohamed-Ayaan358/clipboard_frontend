@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -431,11 +431,9 @@ async function userceate(username, authID, createUser) {
 function Land() {
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0();
-  const [createUser, { data, loading, error }] = useMutation(CreateUser, {
-    onCompleted: (data) => {
-      console.log(data);
-    },
-  });
+  const [createUser, { loading, error }] = useMutation(CreateUser);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
   if (isAuthenticated) {
     userceate(user.name, user.sub, createUser);
   }
