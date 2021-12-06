@@ -19,14 +19,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import FolderIcon from "@mui/icons-material/Folder";
-import "../pages/pages.css";
+import "./Sidebar.css";
 const SidebarData = [
-  {
-    title: "Home",
-    path: "/home",
-    icon: <DashboardIcon />,
-    cName: "nav-text",
-  },
   {
     title: "Calendar",
     path: "/calendar",
@@ -38,7 +32,13 @@ const SidebarData = [
     path: "/folders",
     icon: <FolderIcon />,
     cName: "nav-text",
-  },
+  }, ,
+  {
+    title: "Trello",
+    path: "/trello",
+    icon: <DashboardIcon />,
+    cName: "nav-text",
+  }
 ];
 
 const drawerWidth = 200;
@@ -205,7 +205,7 @@ export default function MiniDrawer(props) {
                 }
                 }
                 key={item}
-                sx={{ color: "#FFFFFF", top: "250px" }}
+                sx={{ color: "#FFFFFF", top: "200px" }}
               >
                 <ListItemIcon key={index}>
                   <Link to={item.path}>
@@ -227,7 +227,7 @@ export default function MiniDrawer(props) {
               <ListItem
                 button
                 key={item}
-                sx={{ color: "#FFFFFF", top: "250px" }}
+                sx={{ color: "#FFFFFF", top: "200px" }}
               >
                 <ListItemIcon key={index}>
                   <Link to={item.path}>
