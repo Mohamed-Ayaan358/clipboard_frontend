@@ -1,3 +1,14 @@
 .cJzjCn{
     color:red;
 }
+
+.trellobox{
+    display : flex;
+    flex-direction : column;
+    padding-left : 15vh;
+}
+
+.dxmxko{
+    border-radius : 20px;
+}
+
