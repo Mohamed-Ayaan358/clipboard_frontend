@@ -1,4 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
+import moment from "moment";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -215,8 +216,37 @@ function NotLoggedIn() {
   );
 }
 
+const TodoQuery = gql`
+  query GetTodos($username: String!, $searchdate: String!) {
+    getTodos(username: $username, searchdate: $searchdate) {
+      id
+      title
+      status
+      description
+      createdAt
+      date
+    }
+  }
+`;
 function LoggedIn() {
+  let recentwork = null;
+  let [globdata, updateGlob] = useState([]);
   const { user, logout } = useAuth0();
+  const { loading, data, error } = useQuery(TodoQuery, {
+    variables: {
+      username: user.name.toString(),
+      searchdate: moment(new Date()).format("DDMMYYYY").toString(),
+    },
+    fetchPolicy: "no-cache",
+    onCompleted: async (data) => {
+      await updateGlob(data.getTodos);
+
+      console.log(data);
+      if (data[0] === undefined) recentwork = null;
+      else recentwork = globdata[0].title;
+    },
+  });
+
   const [quote, setQuote] = useState(" ");
   React.useEffect(() => {
     const fetchData = async () => {
@@ -361,10 +391,7 @@ function LoggedIn() {
                 <h4 class="card-title" style={{ color: "#E42346" }}>
                   TO DO
                 </h4>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+                <p class="card-text">{recentwork}</p>
               </div>
             </a>
           </div>
