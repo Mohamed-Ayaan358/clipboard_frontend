@@ -18,7 +18,7 @@ const cache = new InMemoryCache({
 });
 
 const client = new ApolloClient({
-  uri: "https://navin.works:8443/graphql",
+  uri: "http://localhost:8000/graphql",
   cache: cache,
 });
 
