@@ -25,16 +25,16 @@ function App() {
               </div>
             )}
           />
-
           <ProtectedRoute
-            path="/home"
+            path="/trello"
             component={() => (
               <div class="barcontent">
-                <Navbar content={Home} />
-                <Home />
+                <Navbar />
+                <Trello />
               </div>
             )}
           />
+
 
           <ProtectedRoute
             path="/calendar"
@@ -56,15 +56,7 @@ function App() {
             )}
           />
 
-          <ProtectedRoute
-            path="/trello"
-            component={() => (
-              <div class="barcontent">
-                <Navbar />
-                <Trello />
-              </div>
-            )}
-          />
+
 
           <Route path="" component={notFound} />
         </Switch>
