@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Loading, Navbar } from "./components";
 import { ProtectedRoute } from "./auth"
-import { Home, CalendarComp, Folders, Land, notFound } from "./pages"
+import { Home, CalendarComp, Folders, Land, notFound, Trello } from "./pages"
 
 function App() {
   const { isLoading } = useAuth0();
@@ -52,6 +52,16 @@ function App() {
               <div class="barcontent">
                 <Navbar />
                 <Folders />
+              </div>
+            )}
+          />
+
+          <ProtectedRoute
+            path="/trello"
+            component={() => (
+              <div class="barcontent">
+                <Navbar />
+                <Trello />
               </div>
             )}
           />
