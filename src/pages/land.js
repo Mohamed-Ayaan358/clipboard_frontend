@@ -1,6 +1,7 @@
 import { useQuery, gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Navbar } from "../components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,7 @@ import "./pages.css";
 
 function Card(props) {
   return (
-    <div class="col-sm-6 col-lg-4">
+    <div class="col-sm-6 col-lg-4 my-2">
       <div class="card text-center clean-card">
         <img
           class="card-img-top w-100 d-block"
@@ -18,7 +19,7 @@ function Card(props) {
         />
         <div class="card-body info">
           <h4 class="card-title">{props.name}</h4>
-          <p class="card-text">
+          <p class="card-text" style={{ height: "120px" }}>
             {props.about}
             <br />
             Studying CSE at PES University
@@ -59,7 +60,7 @@ function NotLoggedIn() {
           ClipBoard
         </div>
 
-        <button
+        <div
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -106,7 +107,7 @@ function NotLoggedIn() {
       <div main class="page landing-page">
         <section class="cover">
           <div
-            class="cover-inside "
+            class="cover-inside"
             style={{
               marginLeft: "auto",
               marginRight: "auto",
@@ -115,7 +116,7 @@ function NotLoggedIn() {
           >
             <div
               class="card shadow"
-              style={{ width: "500px", borderRadius: "30px" }}
+              style={{ borderRadius: "30px" }}
             >
               <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Typography paragraph id="tagline1">
@@ -236,81 +237,18 @@ function LoggedIn() {
     <>
       {setSessionStorage(user)}
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-        <div class="navbar-brand" style={{ paddingLeft: "10px" }} href="#">
-          <img
-            src={Pin}
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt="logo"
-          ></img>
-          ClipBoard
-        </div>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarContent"
-          aria-controls="navbarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        />
-
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarContent"
-        >
-          <ul class="navbar-nav mr-md-2">
-            <li class="nav-item active">
-              <a class="nav-link" href="/calendar">
-                Calendar
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/folder">
-                Folders
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div style={{ paddingRight: "10px" }}>
-          <button
-            class="btn"
-            style={{
-              color: "white",
-              backgroundColor: "#E42346",
-              borderColor: "#E42346",
-            }}
-            type="button"
-            onClick={() => {
-              sessionStorage.removeItem("user");
-              sessionStorage.removeItem("nickname");
-              sessionStorage.removeItem("id");
-              logout({
-                returnTo: window.location.origin,
-              });
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
-
-      <div class="row g-0 justify-content-center">
+      <Navbar />
+      <div class="row g-0 justify-content-center" style={{ marginLeft: "50px" }} >
         <div
           class="card text-center clean-card shadow my-3"
-          style={{ borderRadius: "30px", width: "35%" }}
+          style={{ borderRadius: "30px", height: "90vh", width: "35%", minWidth: "250px" }}
         >
           <div style={{ textAlign: "center" }}>
             <img
               class="rounded-circle mb-3 mt-4"
               src={user.picture}
               alt={user.name}
-              width="160"
-              height="160"
+              width="60%"
             />
           </div>
 
@@ -325,7 +263,7 @@ function LoggedIn() {
         &nbsp; &nbsp;
         <div
           class="card text-center clean-card shadow my-3"
-          style={{ borderRadius: "30px", width: "60%" }}
+          style={{ borderRadius: "30px", width: "60%", minWidth: "300px" }}
         >
           <div class="row justify-content-center">
             <a
@@ -335,6 +273,7 @@ function LoggedIn() {
                 textDecoration: "none",
                 borderRadius: "30px",
                 width: "43%",
+                minWidth: "200px"
               }}
             >
               <div class="card-body info">
@@ -355,6 +294,7 @@ function LoggedIn() {
                 textDecoration: "none",
                 borderRadius: "30px",
                 width: "43%",
+                minWidth: "200px"
               }}
             >
               <div class="card-body info">
@@ -390,19 +330,6 @@ function LoggedIn() {
           </div>
         </div>
       </div>
-
-      {/* <div>
-        <h4>Quote of the day</h4>
-        <p class="linebreak">{quote.quote}</p>
-        <p>- {quote.author}</p>
-      </div> */}
-
-      <footer class="page-footer">
-        <p>
-          <br />
-          Copyright © ClipBoard 2021
-        </p>
-      </footer>
     </>
   );
 }
@@ -418,7 +345,7 @@ const CreateUser = gql`
 `;
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-async function userceate(username, authID, createUser) {
+async function usercreate(username, authID, createUser) {
   await createUser({
     variables: {
       username: username,
@@ -437,7 +364,7 @@ function Land() {
     },
   });
   if (isAuthenticated) {
-    userceate(user.name, user.sub, createUser);
+    usercreate(user.name, user.sub, createUser);
   }
 
   return isAuthenticated ? <LoggedIn /> : <NotLoggedIn />;

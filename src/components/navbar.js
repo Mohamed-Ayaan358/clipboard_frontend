@@ -5,7 +5,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -20,6 +19,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import FolderIcon from "@mui/icons-material/Folder";
 import "./Sidebar.css";
+
+// eslint-disable-next-line no-sparse-arrays
 const SidebarData = [
   {
     title: "Calendar",
@@ -41,7 +42,7 @@ const SidebarData = [
   }
 ];
 
-const drawerWidth = 200;
+const drawerWidth = 250;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -147,7 +148,6 @@ export default function MiniDrawer(props) {
               </div>
             );
           })}
-          <Divider id="mini-divider" />
 
           <IconButton
             color="inherit"
@@ -189,6 +189,35 @@ export default function MiniDrawer(props) {
           })}
         </List>
 
+        {ShareData.map((item, index) => {
+          return (
+            <div>
+              <ListItem
+                button
+                key={item}
+                sx={{ color: "#FFFFFF" }}
+              >
+                <ListItemIcon key={index}>
+                  <Link to={item.path}>
+                    <IconButton sx={{ color: "#FFFFFF" }}
+                      onClick={() => {
+                        try {
+                          navigator.share({ title: "ClipBoard", url: window.location.href });
+                        } catch (err) {
+                          console.error("Share failed:", err.message);
+                        }
+                      }}>
+                      {item.icon}
+                    </IconButton>
+                  </Link>
+                </ListItemIcon>
+                <Link id="linklogo" to={item.path}>
+                  <ListItemText primary={item.text} />
+                </Link>
+              </ListItem>
+            </div>
+          );
+        })}
 
         {LogoutheadData.map((item, index) => {
           return (
@@ -205,29 +234,7 @@ export default function MiniDrawer(props) {
                 }
                 }
                 key={item}
-                sx={{ color: "#FFFFFF", top: "200px" }}
-              >
-                <ListItemIcon key={index}>
-                  <Link to={item.path}>
-                    <IconButton sx={{ color: "#FFFFFF" }}>
-                      {item.icon}
-                    </IconButton>
-                  </Link>
-                </ListItemIcon>
-                <Link id="linklogo" to={item.path}>
-                  <ListItemText primary={item.text} />
-                </Link>
-              </ListItem>
-            </div>
-          );
-        })}
-        {ShareData.map((item, index) => {
-          return (
-            <div>
-              <ListItem
-                button
-                key={item}
-                sx={{ color: "#FFFFFF", top: "200px" }}
+                sx={{ color: "#FFFFFF" }}
               >
                 <ListItemIcon key={index}>
                   <Link to={item.path}>
@@ -244,6 +251,6 @@ export default function MiniDrawer(props) {
           );
         })}
       </Drawer>
-    </Box>
+    </Box >
   );
 }
