@@ -14,19 +14,18 @@ const FilesQuery = gql`
 `;
 
 const AddFile = gql`
-mutation AddFile($username: String!, $authId: String!, $files: fileInput) {
-  AddFile(username: $username, authID: $authId, files: $files) {
-    id
-    username
-    authID
-    files {
-      name
-      size
-      type
-      lastModified
+  mutation AddFile($username: String!, $authID: String!, $files: fileInput) {
+    AddFile(username: $username, authID: $authID, files: $files) {
+      username
+      authID
+      files {
+        name
+        size
+        type
+        lastModified
+      }
     }
   }
-}
 `;
 
 async function uploadFile(username, authID, files, addFile) {
@@ -38,14 +37,9 @@ async function uploadFile(username, authID, files, addFile) {
   });
 }
 
-
-
-
 // class FileInput extends React.Component {
 function FileInput() {
-
   let [file, setFile] = useState({});
-
 
   let [globdata, updateGlob] = useState([]);
   let [len, setLen] = useState(0);
@@ -72,17 +66,14 @@ function FileInput() {
   const [addFile, { dat }] = useMutation(AddFile, {
     onCompleted: async (dat) => {
       let newglob = [...globdata];
-      await newglob.push(dat.AddTodo);
-      await updatelist(newglob);
     },
   });
 
-  const handleFileChange = event => {
+  const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
   const handleFileUpload = (e) => {
-
     if (!file || !file.name) {
       return alert("Please fill all the fields");
     } else {
@@ -100,12 +91,12 @@ function FileInput() {
         variables: {
           authID: user.sub.toString(),
           username: user.name.toString(),
-          file: {
+          files: {
             name: file.name,
-            size: file.size,
+            size: file.size.toString(),
             type: file.type,
-            lastModified: file.lastModifiedDate
-          }
+            lastModified: file.lastModified.toString(),
+          },
         },
       });
       e.preventDefault();
@@ -116,14 +107,21 @@ function FileInput() {
 
   return (
     <div>
-      <input class="btn btn-dark bg-black" type="file" onChange={handleFileChange} />
+      <input
+        class="btn btn-dark bg-black"
+        type="file"
+        onChange={handleFileChange}
+      />
       &nbsp;
-      <button class="btn btn-dark bg-black" style={{ color: "#E42346" }} onClick={handleFileUpload} >
+      <button
+        class="btn btn-dark bg-black"
+        style={{ color: "#E42346" }}
+        onClick={handleFileUpload}
+      >
         Upload!
       </button>
     </div>
   );
-
 }
 
 function File(props) {
@@ -133,7 +131,7 @@ function File(props) {
       style={{
         textDecoration: "none",
         borderRadius: "30px",
-        minWidth: "200px"
+        minWidth: "200px",
       }}
     >
       <div class="card-body info">
@@ -141,8 +139,8 @@ function File(props) {
           {props.name}
         </h4>
         <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-          do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
     </div>
@@ -151,31 +149,34 @@ function File(props) {
 
 function Folders() {
   return (
-    <div style={{ paddingLeft: "100px" }} >
+    <div style={{ paddingLeft: "100px" }}>
       <br />
-      <h1 >Files</h1>
+      <h1>Files</h1>
       <br />
 
       <div
         class="card text-center clean-card shadow my-3 g-0"
-        style={{ borderRadius: "30px", width: "99%", height: "60vh", minWidth: "300px" }}
+        style={{
+          borderRadius: "30px",
+          width: "99%",
+          height: "60vh",
+          minWidth: "300px",
+        }}
       >
-
-        <div class="card shadow mx-4 my-2 "
+        <div
+          class="card shadow mx-4 my-2 "
           style={{
             borderRadius: "15px",
             padding: "10px",
             width: "450px",
-            minWidth: "100px"
+            minWidth: "100px",
           }}
         >
           <FileInput />
         </div>
-
       </div>
     </div>
   );
 }
 
 export default Folders;
-
