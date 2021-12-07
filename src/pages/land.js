@@ -114,10 +114,7 @@ function NotLoggedIn() {
               width: "fit-content",
             }}
           >
-            <div
-              class="card shadow"
-              style={{ borderRadius: "30px" }}
-            >
+            <div class="card shadow" style={{ borderRadius: "30px" }}>
               <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Typography paragraph id="tagline1">
                   Compile everything.
@@ -238,10 +235,18 @@ function LoggedIn() {
       {setSessionStorage(user)}
 
       <Navbar />
-      <div class="row g-0 justify-content-center" style={{ marginLeft: "50px" }} >
+      <div
+        class="row g-0 justify-content-center"
+        style={{ marginLeft: "50px" }}
+      >
         <div
           class="card text-center clean-card shadow my-3"
-          style={{ borderRadius: "30px", height: "90vh", width: "35%", minWidth: "250px" }}
+          style={{
+            borderRadius: "30px",
+            height: "90vh",
+            width: "35%",
+            minWidth: "250px",
+          }}
         >
           <div style={{ textAlign: "center" }}>
             <img
@@ -273,17 +278,14 @@ function LoggedIn() {
                 textDecoration: "none",
                 borderRadius: "30px",
                 width: "43%",
-                minWidth: "200px"
+                minWidth: "200px",
               }}
             >
               <div class="card-body info">
                 <h4 class="card-title" style={{ color: "#E42346" }}>
                   Up Coming Events
                 </h4>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+                <p class="card-text"></p>
               </div>
             </a>
 
@@ -294,17 +296,14 @@ function LoggedIn() {
                 textDecoration: "none",
                 borderRadius: "30px",
                 width: "43%",
-                minWidth: "200px"
+                minWidth: "200px",
               }}
             >
               <div class="card-body info">
                 <h4 class="card-title" style={{ color: "#E42346" }}>
                   TO DO
                 </h4>
-                <p class="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+                <p class="card-text"></p>
               </div>
             </a>
           </div>
