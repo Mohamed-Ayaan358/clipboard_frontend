@@ -1,14 +1,17 @@
-import "./App.css";
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import "./App.css";
-//Problem is that it is overriding the script already there
-import Sidebar from "./Sidebar";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Loading, Navbar } from "./components";
+import { ProtectedRoute } from "./auth"
+import { Home, CalendarComp, Folders, Land, notFound, Trello } from "./pages"
 
-import Land from "./pages/land";
-import Home from "./pages/Home";
-import Calender from "./pages/Calender";
 function App() {
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return (<Loading />)
+  }
+
   return (
     <>
       <Router>
@@ -22,26 +25,40 @@ function App() {
               </div>
             )}
           />
+          <ProtectedRoute
+            path="/trello"
+            component={() => (
+              <div class="barcontent">
+                <Navbar />
+                <Trello />
+              </div>
+            )}
+          />
 
-          <Route
-            path="/home"
-            render={() => (
-              <div>
-                <Sidebar />
-                <Home />
+
+          <ProtectedRoute
+            path="/calendar"
+            component={() => (
+              <div class="barcontent">
+                <Navbar />
+                <CalendarComp />
               </div>
             )}
           />
-          <Route
-            path="/calender"
-            render={() => (
-              <div>
-                <Sidebar />
-                <Calender />
+
+          <ProtectedRoute
+            path="/folders"
+            component={() => (
+              <div class="barcontent">
+                <Navbar />
+                <Folders />
               </div>
             )}
           />
-          {/* <Route path='/sign-in' component={SignIn} /> */}
+
+
+
+          <Route path="" component={notFound} />
         </Switch>
       </Router>
     </>

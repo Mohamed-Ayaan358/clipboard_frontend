@@ -1,0 +1,116 @@
+
+
+.react-calendar {
+    width:60%;
+    color:#E42346;
+    background: #0D0C1D;
+    border: 1px solid #0D0C1D;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+    border-radius: 20px;
+    min-height : 100%;
+    opacity: 0.9;
+
+}
+.react-calendar button{
+    opacity:1.0;
+
+    color:#FFFFFF;
+    border-radius : 30px;
+    font-size : 33px;
+}
+.react-calendar__tile:enabled:hover
+ {
+  background-color:#E42346;
+}
+.react-calendar__tile--now {
+  background-color:#E42346;
+}
+
+
+.mainbox{
+    display : flex;
+    flex-direction : column;
+    padding-left : 7vh;
+    padding-right : 7vh;
+}
+
+.sleepingdiv{
+    min-width : 50%;
+    display : flex;
+    grid-gap : 20px;
+    padding : 20px;
+}
+.css-cvhtoe-MuiButtonBase-root-MuiListItemButton-root,.css-e0yuwi{
+    border-bottom: 2px solid #E42346;
+}
+
+.tolist{
+    position : relative;
+    border-radius : 20px;
+    padding : 20px;
+    margin : 0px;
+    list-style-type : none;
+}
+.list{
+    min-width : 50%;
+    list-style-type : none;
+    padding : 20px;
+}
+
+
+.dailyquote{
+    border-radius : 20px;
+    background-color : #0D0C1D;
+    color:#FFFFFF;
+    opacity:0.9;
+    padding : 20px;
+    line-height : 15px;
+    word-wrap: break-word;
+}
+.linebreak{
+    word-wrap : break-word;
+}
+
+.standingdiv{
+    height : 100%;
+    display : flex;
+    flex-direction : column;
+    grid-gap : 15px;
+}
+.bottom{
+    position : absolute;
+    bottom : 10px;
+    border : 1px solid black;
+    margin : 10px;
+    padding : 20px;
+    border-radius : 20px;
+}
+.compose{
+    display : flex;
+    flex-direction : column;
+    grid-gap : 20px;
+}
+
+.listdiv{
+    position : relative;
+    border-radius : 20px;
+    background-color : #0D0C1D;
+    color:#FFFFFF;
+    opacity:0.9;
+    padding : 20px;
+    margin : 0px;
+    list-style-type : none;
+}
+
+.head{
+    float : left;
+}
+.userinfo{
+  
+    float : right;
+}
+
+.col-3{
+    width:100%;
+}

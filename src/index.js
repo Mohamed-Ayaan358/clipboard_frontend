@@ -1,12 +1,36 @@
-import React from "react";
+import * as React from "react";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { Auth0ProviderWithHistory } from "./auth";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import "./index.css";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const cache = new InMemoryCache({
+  typePolicies: {
+    User: {
+      keyFields: ["username"],
+    },
+    Todo: {
+      keyFields: ["title", "date"],
+    },
+  },
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const client = new ApolloClient({
+  uri: "http://localhost:8000/graphql",
+  cache: cache,
+});
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <StyledEngineProvider injectFirst>
+      <Auth0ProviderWithHistory>
+        <App />
+      </Auth0ProviderWithHistory>
+      {/* <Land /> */}
+      {/* This must be the main thing here and have a link to het started on it to take */}
+    </StyledEngineProvider>
+  </ApolloProvider>,
+  document.querySelector("#root")
+);

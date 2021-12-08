@@ -1,0 +1,20 @@
+/* body,
+html {
+  height: 100%;
+  margin: 0;
+  background-color: #000000;
+  color: white;
+  border-color: white;
+} */
+
+a:link,
+a:visited {
+  color: #e42346;
+  background-color: transparent;
+}
+
+a:hover,
+a:active {
+  color: steelblue;
+  background-color: transparent;
+}
