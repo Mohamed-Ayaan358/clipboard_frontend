@@ -144,21 +144,6 @@ function CalendarComp() {
     setDescription(event.target.value);
   };
 
-  //Below is to handle mutations , i.e adding new work on user disablePadding
-  //ref :
-  /*
-   *$userId: ID!
-   * $title: String!
-   * $description: String!
-   * $status: Boolean!
-   * $date: String!
-   */
-  /*
-   *function deleteTodo(e) {
-   *  console.log("hello", e);
-   *}
-   */
-
   const [deleted, setDeleted] = useState(false);
   const [added, setAdded] = useState(false);
   let renderRow = function renderRow(props) {
@@ -266,6 +251,7 @@ function CalendarComp() {
                       onClick={(e) => {
                         if (title === "" || description === "") {
                           alert("Please fill all the fields");
+                          e.preventDefault();
                         } else {
                           addTodo({
                             variables: {
@@ -308,11 +294,3 @@ function CalendarComp() {
   );
 }
 export default CalendarComp;
-
-/*
- * Very important part of all components
- *<div class="headerpad">
- *        <h1 class="head">Calendar</h1>
- *        <h3 class="userinfo">{user}</h3>
- *      </div>
- */

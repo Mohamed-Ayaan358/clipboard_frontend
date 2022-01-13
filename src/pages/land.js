@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navbar } from "../components";
@@ -44,6 +44,7 @@ function setSessionStorage(user) {
   sessionStorage.setItem("id", user.sub);
 }
 
+//renders this if not logged in
 function NotLoggedIn() {
   const { loginWithPopup } = useAuth0();
   return (
@@ -212,16 +213,17 @@ function NotLoggedIn() {
     </>
   );
 }
-
+//renders this if logged in
 function LoggedIn() {
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
   const [quote, setQuote] = useState(" ");
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("https://quotes.rest/qod?language=en");
-      const json = await result.json();
+      // const result = await fetch("https://quotes.rest/qod?language=en");
+      const json = undefined;
+      //seems like the quotes stuff is broken as of commit "refractor-1"
       console.log(json);
-      if (json.contents === undefined) {
+      if (json === undefined) {
         setQuote("No quote available");
       } else {
         setQuote(json.contents.quotes[0]);
@@ -357,10 +359,7 @@ async function usercreate(username, authID, createUser) {
 function Land() {
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0();
-  const [createUser, { data, loading, error }] = useMutation(CreateUser, {
-    onCompleted: (data) => {
-      console.log(data);
-    },
+  const [createUser] = useMutation(CreateUser, {
   });
   if (isAuthenticated) {
     usercreate(user.name, user.sub, createUser);

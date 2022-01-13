@@ -28,8 +28,6 @@ ReactDOM.render(
       <Auth0ProviderWithHistory>
         <App />
       </Auth0ProviderWithHistory>
-      {/* <Land /> */}
-      {/* This must be the main thing here and have a link to het started on it to take */}
     </StyledEngineProvider>
   </ApolloProvider>,
   document.querySelector("#root")
